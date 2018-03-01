@@ -16,8 +16,8 @@ namespace UnityStandardAssets.CrossPlatformInput
 
 		public int MovementRange = 100;
 		public AxisOption axesToUse = AxisOption.Both; // The options for the axes that the still will use
-		public string horizontalAxisName = "Horizontal"; // The name given to the horizontal axis for the cross platform input
-		public string verticalAxisName = "Vertical"; // The name given to the vertical axis for the cross platform input
+		public string horizontalAxisName = "HorizontalB"; // The name given to the horizontal axis for the cross platform input
+		public string verticalAxisName = "VerticalB"; // The name given to the vertical axis for the cross platform input
 
 		Vector3 m_StartPos;
 		bool m_UseX; // Toggle for using the x axis
@@ -30,8 +30,8 @@ namespace UnityStandardAssets.CrossPlatformInput
 			CreateVirtualAxes();
 		}
 
-
-		public GameObject ship;
+		public float x;
+		public float y;
 
         void Start()
         {
@@ -46,11 +46,13 @@ namespace UnityStandardAssets.CrossPlatformInput
 			if (m_UseX)
 			{
 				m_HorizontalVirtualAxis.Update(-delta.x);
+				x = -delta.x;
 			}
 
 			if (m_UseY)
 			{
 				m_VerticalVirtualAxis.Update(delta.y);
+				y = delta.y;
 			}
 		}
 
@@ -63,12 +65,12 @@ namespace UnityStandardAssets.CrossPlatformInput
 			// create new axes based on axes to use
 			if (m_UseX)
 			{
-				m_HorizontalVirtualAxis = new CrossPlatformInputManager.VirtualAxis(horizontalAxisName);
+				m_HorizontalVirtualAxis = new CrossPlatformInputManager.VirtualAxis(horizontalAxisName, true);
 				CrossPlatformInputManager.RegisterVirtualAxis(m_HorizontalVirtualAxis);
 			}
 			if (m_UseY)
 			{
-				m_VerticalVirtualAxis = new CrossPlatformInputManager.VirtualAxis(verticalAxisName);
+				m_VerticalVirtualAxis = new CrossPlatformInputManager.VirtualAxis(verticalAxisName, true);
 				CrossPlatformInputManager.RegisterVirtualAxis(m_VerticalVirtualAxis);
 			}
 		}

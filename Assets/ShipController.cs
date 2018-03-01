@@ -7,7 +7,6 @@ public class ShipController : MonoBehaviour {
 
 	public float forceMultipler;
 	public Camera mainCamera;
-	public ShipJoystick jc;
 	private Rigidbody2D body;
 	public ParticleSystem booster;
 	public GameObject planet;
@@ -22,6 +21,32 @@ public class ShipController : MonoBehaviour {
 	public Image health;
 	public int numPlanets;
 	public float rotateForce;
+	public float cameraMinView;
+	public float cameraMaxView;
+	public float minCameraDistSpeed;
+	public float maxCameraDistSpeed;
+
+	public UnityStandardAssets.CrossPlatformInput.Joystick js;
+
+	public bool tR {
+		set {
+			tiltingRight = value;
+		}
+		get {
+			return tiltingRight;
+		}
+	}
+
+	public bool tL {
+		set {
+			tiltingLeft = value;
+		}
+		get {
+			return tiltingLeft;
+		}
+	}
+	public bool tiltingRight;
+	public bool tiltingLeft;
 
 
 	// Use this for initialization
@@ -30,7 +55,7 @@ public class ShipController : MonoBehaviour {
 		PlanetSystem ps = new PlanetSystem (orbitSpacing, numPlanets, minScale, maxScale);
 		List<Vector2> planets = ps.generatePlanetLocations ();
 		lr.SetVertexCount (circleSegments * numPlanets);
-		int i = 0;
+		int i = -1;
 		foreach(Vector2 p in planets) {
 			
 			GameObject obj = Instantiate (planet);
@@ -56,29 +81,21 @@ public class ShipController : MonoBehaviour {
 	}
 
 
-	
+
 	// Update is called once per frame
 	void Update () {
-		if(Input.touchCount > 0) {
-			foreach(Touch t in Input.touches) {
-				//Vector2 dir = new Vector2 (jc.x, jc.y) * forceMultipler;
-				Vector2 dir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * forceMultipler;
-				print("Ship: " + dir);
-				body.AddForce (dir);
-				float mag = dir.magnitude;
-				var emission = booster.emission;
-				emission.rateOverTime = mag;
-			}
-		}
 		//Vector2 dir = new Vector2 (jc.x, jc.y) * forceMultipler;
-		Vector2 dir2 = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * forceMultipler;
-		float rotForce = -Input.GetAxis ("Rotate") * rotateForce;
-		body.AddRelativeForce (dir2);
-		body.AddTorque (rotForce);
+		Vector2 dir2 = new Vector2(js.x, js.y) * forceMultipler;
+		body.AddForce (dir2);
 		float mag2 = dir2.magnitude;
+		float rotForce = (tiltingLeft ? 1 : 0) + (tiltingRight ? -1 : 0);
+		body.AddTorque (rotForce * rotateForce);
+		float camView = Mathf.Lerp(cameraMinView, cameraMaxView, Mathf.InverseLerp (minCameraDistSpeed, maxCameraDistSpeed, body.velocity.magnitude));
+		mainCamera.orthographicSize = camView;
 		var emission2 = booster.emission;
 		emission2.rateOverTime = mag2;
 		UpdateHealth (h -= (0.000025f * dir2.magnitude));
+		print (new Vector2 (Input.GetAxis ("HorizontalB"), Input.GetAxis ("VerticalB")));
 	}
 	float h = 1f;	
 
@@ -92,12 +109,11 @@ public class ShipController : MonoBehaviour {
 
 		float angle = 20f;
 
-		for (int i = 0; i < (segments + 1); i++)
+		for (int i = 0; i < segments; i++)
 		{
 			x = Mathf.Sin (Mathf.Deg2Rad * angle) * r;
 			y = Mathf.Cos (Mathf.Deg2Rad * angle) * r;
-
-			lr.SetPosition (i + circle * segments ,new Vector3(x,y,z) );
+			lr.SetPosition (i + (circle * segments),new Vector3(x,y,z) );
 			angle += (360f / segments);
 		}
 	}
