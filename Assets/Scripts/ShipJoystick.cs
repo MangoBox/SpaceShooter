@@ -24,7 +24,7 @@ using UnityEngine.EventSystems;
 
 		void OnEnable()
 		{
-			CreateVirtualAxes();
+
 		}
 
 
@@ -49,10 +49,6 @@ using UnityEngine.EventSystems;
 			{
 				y = delta.y;
 			}
-		}
-
-		void CreateVirtualAxes()
-		{
 		}
 
 
