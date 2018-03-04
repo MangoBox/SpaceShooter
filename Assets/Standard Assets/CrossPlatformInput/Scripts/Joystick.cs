@@ -66,33 +66,26 @@ namespace UnityStandardAssets.CrossPlatformInput
 			if (m_UseX)
 			{
 				m_HorizontalVirtualAxis = new CrossPlatformInputManager.VirtualAxis(horizontalAxisName, true);
-				CrossPlatformInputManager.RegisterVirtualAxis(m_HorizontalVirtualAxis);
+				//CrossPlatformInputManager.RegisterVirtualAxis(m_HorizontalVirtualAxis);
 			}
 			if (m_UseY)
 			{
 				m_VerticalVirtualAxis = new CrossPlatformInputManager.VirtualAxis(verticalAxisName, true);
-				CrossPlatformInputManager.RegisterVirtualAxis(m_VerticalVirtualAxis);
+				//CrossPlatformInputManager.RegisterVirtualAxis(m_VerticalVirtualAxis);
 			}
 		}
 
 
 		public void OnDrag(PointerEventData data)
 		{
-			Vector3 newPos = Vector3.zero;
 
-			if (m_UseX)
-			{
-				int delta = (int)(data.position.x - m_StartPos.x);
-				delta = Mathf.Clamp(delta, - MovementRange, MovementRange);
-				newPos.x = delta;
-			}
 
-			if (m_UseY)
-			{
-				int delta = (int)(data.position.y - m_StartPos.y);
-				delta = Mathf.Clamp(delta, -MovementRange, MovementRange);
-				newPos.y = delta;
-			}
+			float deltaX = Mathf.Clamp (data.position.x - m_StartPos.x, -MovementRange, MovementRange);
+			float deltaY = Mathf.Clamp (data.position.y - m_StartPos.y, -MovementRange, MovementRange);
+
+
+			Vector3 newPos = Vector3.ClampMagnitude (new Vector3 (deltaX, deltaY), MovementRange);
+
 			transform.position = new Vector3(m_StartPos.x + newPos.x, m_StartPos.y + newPos.y, m_StartPos.z + newPos.z);
 			UpdateVirtualAxes(transform.position);
 		}

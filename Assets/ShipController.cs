@@ -21,33 +21,32 @@ public class ShipController : MonoBehaviour {
 	public Image health;
 	public int numPlanets;
 	public float rotateForce;
+	public float rotateRevertForce;
+
 	public float cameraMinView;
 	public float cameraMaxView;
 	public float minCameraDistSpeed;
 	public float maxCameraDistSpeed;
 
+	public GameController gc;
+	public GameObject bullet;
+
+	public float healthDmgAmount;
+	public float fuelDrainSpeed;
+	public float bulletForce;
+
+	public float bulletDelay;
+	float currentBulletDelay;
+	bool canShoot {
+		get { 
+			return currentBulletDelay <= 0;
+		}
+
+	}
+
+
 	public UnityStandardAssets.CrossPlatformInput.Joystick js;
-
-	public bool tR {
-		set {
-			tiltingRight = value;
-		}
-		get {
-			return tiltingRight;
-		}
-	}
-
-	public bool tL {
-		set {
-			tiltingLeft = value;
-		}
-		get {
-			return tiltingLeft;
-		}
-	}
-	public bool tiltingRight;
-	public bool tiltingLeft;
-
+	public UnityStandardAssets.CrossPlatformInput.Joystick shootingJs;
 
 	// Use this for initialization
 	void Start () {
@@ -62,8 +61,6 @@ public class ShipController : MonoBehaviour {
 			obj.transform.position = new Vector3(p.x,p.y,10);
 			obj.transform.localScale = Vector3.one * Random.Range (minScale, maxScale);
 			MeshRenderer mr = obj.GetComponent<MeshRenderer> ();
-			mr.material = new Material (planetShader);
-			mr.material.color = new Color (Random.value, Random.value, Random.value);
 
 			CreatePoints (circleSegments, i++ * orbitSpacing, i);
 		}
@@ -80,24 +77,45 @@ public class ShipController : MonoBehaviour {
 
 	}
 
+	float h = 1f;
+
+	void OnCollisionEnter2D(Collision2D col) {
+		float str = col.relativeVelocity.magnitude;
+		h -= str * healthDmgAmount;
+		health.fillAmount = h;
+	}
 
 
 	// Update is called once per frame
 	void Update () {
+		
+
 		//Vector2 dir = new Vector2 (jc.x, jc.y) * forceMultipler;
 		Vector2 dir2 = new Vector2(js.x, js.y) * forceMultipler;
 		body.AddForce (dir2);
-		float mag2 = dir2.magnitude;
-		float rotForce = (tiltingLeft ? 1 : 0) + (tiltingRight ? -1 : 0);
-		body.AddTorque (rotForce * rotateForce);
+		if (dir2.sqrMagnitude == 0) {
+			body.AddTorque (Vector2.Dot (Vector2.right, transform.up) * rotateRevertForce);
+		} else {
+			body.AddTorque (Vector2.Dot (transform.TransformDirection(Vector2.up), dir2) * rotateForce);
+		}
+
 		float camView = Mathf.Lerp(cameraMinView, cameraMaxView, Mathf.InverseLerp (minCameraDistSpeed, maxCameraDistSpeed, body.velocity.magnitude));
 		mainCamera.orthographicSize = camView;
 		var emission2 = booster.emission;
-		emission2.rateOverTime = mag2;
-		UpdateHealth (h -= (0.000025f * dir2.magnitude));
-		print (new Vector2 (Input.GetAxis ("HorizontalB"), Input.GetAxis ("VerticalB")));
+		emission2.rateOverTime = body.velocity.magnitude;
+		UpdateFuel (f -= (fuelDrainSpeed * dir2.magnitude));
+
+		if (f <= 0 || h <= 0) {
+			gc.GameOver ();
+		}
+		Vector2 shootingVec = new Vector2 (shootingJs.x, shootingJs.y);
+		if (shootingVec.sqrMagnitude != 0 && canShoot) {
+			resetShootingDelay ();
+			Shoot ();
+		}
+		currentBulletDelay = Mathf.Clamp (currentBulletDelay - Time.deltaTime, 0, bulletDelay);
 	}
-	float h = 1f;	
+	float f = 1f;	
 
 
 	public LineRenderer lr;
@@ -116,5 +134,17 @@ public class ShipController : MonoBehaviour {
 			lr.SetPosition (i + (circle * segments),new Vector3(x,y,z) );
 			angle += (360f / segments);
 		}
+	}
+
+	void resetShootingDelay() {
+		currentBulletDelay = bulletDelay;
+	}
+
+	void Shoot() {
+		GameObject bul = Instantiate (bullet);
+		float x = shootingJs.x, y = shootingJs.y;
+		bul.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (x, y) * bulletForce);
+		bul.transform.position = transform.position;
+		bul.transform.rotation = Quaternion.Euler(new Vector3 (0,0,Mathf.Atan2(y,x) * Mathf.Rad2Deg));
 	}
 }
