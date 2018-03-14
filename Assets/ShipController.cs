@@ -44,6 +44,12 @@ public class ShipController : MonoBehaviour {
 
 	}
 
+	[Header("Revamped Data")]
+	//Revamped data
+	public float accelerationMultipler;
+	public float speedMultipler;
+
+
 
 	public UnityStandardAssets.CrossPlatformInput.Joystick js;
 	public UnityStandardAssets.CrossPlatformInput.Joystick shootingJs;
