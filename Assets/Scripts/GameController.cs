@@ -18,8 +18,27 @@ public class GameController : MonoBehaviour {
 	/// </summary>
 	public static ShipData currentShipData;
 
+	//ACCESSOR FIELDS
+	public PlanetController pc {
+		get {
+			return GetComponent<PlanetController> ();
+		}
+	}
+
+
+	/// <summary>
+	/// To be called to start the game.
+	/// </summary>
 	public void StartGame() {
+		for (int i = 0; i < 25; i++) {
+			pc.SpawnPlanet (new Vector2 (Random.value * 1000, Random.value * 10));
+		}
+	}
 
+	//TEMP CODE
+	//Remove everything here
 
+	void Start() {
+		StartGame ();
 	}
 }

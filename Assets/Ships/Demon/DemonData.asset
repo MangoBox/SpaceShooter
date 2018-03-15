@@ -14,6 +14,6 @@ MonoBehaviour:
   displayName: Demon
   shipType: 0
   shipRarity: 1
-  shipPrefab: {fileID: 0}
+  shipPrefab: {fileID: 1159878680644794, guid: 38ab7637df7a6f54d88db042bab233a7, type: 2}
   accelerationMultiplier: 1
   speedMultipler: 1

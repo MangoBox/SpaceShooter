@@ -51,8 +51,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4823437481174424}
-  - component: {fileID: 114266560278500260}
   - component: {fileID: 58445826174356210}
+  - component: {fileID: 114523752534735280}
   m_Layer: 0
   m_Name: Planet1
   m_TagString: Untagged
@@ -176,7 +176,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 5.88
---- !u!114 &114266560278500260
+--- !u!114 &114523752534735280
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -184,18 +184,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1455045088749212}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a19485684e1eb04c9e6734312c910d3, type: 3}
+  m_Script: {fileID: 11500000, guid: d6133032cd77564459d86710d710bedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   planetCore: {fileID: 212322569867451866}
   planetBackFoilage: {fileID: 212107502284225888}
   planetUpperFoilage: {fileID: 212609131814508924}
   planetLowerFoilage: {fileID: 212769850123617682}
-  planetShader: {fileID: 10755, guid: 0000000000000000f000000000000000, type: 0}
-  enemiesToSpawn: 5
-  enemyHeight: 5
-  enemy: {fileID: 1157812869336658, guid: c6b77d869142dcb4b96495505ac107fb, type: 2}
-  rotateSpeed: 0.25
+  planetShader: {fileID: 10708, guid: 0000000000000000f000000000000000, type: 0}
+  rotateSpeed: 0.3
 --- !u!212 &212107502284225888
 SpriteRenderer:
   m_ObjectHideFlags: 1

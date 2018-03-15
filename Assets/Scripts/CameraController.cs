@@ -13,6 +13,8 @@ public class CameraController : MonoBehaviour {
 	}
 
 	public void FixedUpdate() {
-		t.position = Vector3.Lerp (t.position, target.position, 0.4f) + new Vector3(0,0,-10);
+
+		Vector3 cameraPos = new Vector3 (target.position.x + 5, 0, target.position.z);
+		t.position = Vector3.Lerp (t.position, cameraPos, 0.4f) + new Vector3(0,0,-10);
 	}
 }

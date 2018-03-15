@@ -19,7 +19,7 @@ public class BulletController : MonoBehaviour {
 		if (col.tag == "Enemy") {
 			Destroy (col.gameObject);
 
-			GameController.gc.DecKillsLeft ();
+			//GameController.gc.DecKillsLeft ();
 		}
 		destroyBullet (true);
 

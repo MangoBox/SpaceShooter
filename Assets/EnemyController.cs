@@ -19,15 +19,15 @@ public class EnemyController : MonoBehaviour {
 	static int i =0;
 
 	public static GameObject inst(Vector2 pos) {
-		GameObject obj = Instantiate (GameController.getEnemyPrefab);
+		/*GameObject obj = Instantiate (GameController.getEnemyPrefab);
 		obj.transform.position = pos;
 
 		EnemyController ec = obj.GetComponent<EnemyController> ();
 		ec.target = GameController.gc.gameObject;
 		GameController.gc.IncKillsLeft ();
 		print (++i);
-		return obj;
-
+		return obj;*/
+		return null;
 	}
 
 

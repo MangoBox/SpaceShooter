@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+	public Rigidbody2D ship;
+	public float shipForce;
+
+	public static Vector2 touchPos;
+
+	void Update() {
+		if (Input.touchCount > 0) {
+			foreach (Touch t in Input.touches) {
+				Vector2 pos = t.position;
+				Vector2 wPos = Camera.main.ScreenToWorldPoint (pos);
+				touchPos = wPos;
+
+			}
+		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

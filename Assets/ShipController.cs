@@ -112,7 +112,7 @@ public class ShipController : MonoBehaviour {
 		UpdateFuel (f -= (fuelDrainSpeed * dir2.magnitude));
 
 		if (f <= 0 || h <= 0) {
-			gc.GameOver ();
+			//gc.GameOver ();
 		}
 		Vector2 shootingVec = new Vector2 (shootingJs.x, shootingJs.y);
 		if (shootingVec.sqrMagnitude != 0 && canShoot) {
