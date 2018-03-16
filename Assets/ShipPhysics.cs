@@ -17,9 +17,10 @@ public class ShipPhysics : MonoBehaviour {
 	public ShipType shipType;
 
 	[Header("Handling Physics")]
-	public float rotateForce = 1;
+	public float rotateForce = 4;
 	public float rotateRevertForce = 1;
 	public float agility = 1;
+	public float directionCorrectForce = 1;
 
 	[Header("World Physics")]
 	public float travellingSpeed;
@@ -31,10 +32,19 @@ public class ShipPhysics : MonoBehaviour {
 
 	void FixedUpdate() {
 		//Constant forwards motion
-		body.AddForce(Vector2.right * travellingSpeed);
+		body.AddForce(transform.right * travellingSpeed);
 
-		Vector3 force = InputController.touchPos - (Vector2)transform.position;
-		body.AddForce (force * agility);
-		body.AddTorque (Vector2.Dot (transform.TransformDirection(Vector2.up), force) * rotateForce);
+		Vector3 force = (InputController.touchPos - (Vector2)transform.position) * agility;
+		body.AddForce (force);
+		body.AddTorque (Vector2.Dot (transform.TransformDirection(Vector2.up), body.velocity) * directionCorrectForce);
+	}
+
+	public bool isOnScreen() {
+		float x = Camera.main.ScreenToWorldPoint (Vector3.zero).x;
+		return transform.position.x > x;
+	}
+
+	public bool isCompletedLevel() {
+		return transform.position.x > 1000;
 	}
 }

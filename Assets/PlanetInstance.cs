@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlanetInstance : MonoBehaviour {
 
+	[Header("Sprites & Graphics")]
 	public SpriteRenderer planetCore;
 	public SpriteRenderer planetBackFoilage;
 	public SpriteRenderer planetUpperFoilage;
@@ -11,7 +12,15 @@ public class PlanetInstance : MonoBehaviour {
 
 	public Shader planetShader;
 
-	public float rotateSpeed;
+	[Header("Physics")]
+	public float minRotateSpeed;
+	public float maxRotateSpeed;
+
+	public float minScale;
+	public float maxScale;
+
+
+
 
 	void Start() {
 		//Planet Core
@@ -26,10 +35,12 @@ public class PlanetInstance : MonoBehaviour {
 		planetLowerFoilage.color = new Color (Random.value, Random.value, Random.value);
 
 		transform.Rotate(new Vector3(0,0,Random.Range(0,360)));
+
+		transform.localScale = Vector3.one * Random.Range (minScale, maxScale);
 	}
 
 
 	void Update() {
-		transform.Rotate(new Vector3 (0, 0, rotateSpeed));
+		transform.Rotate(new Vector3 (0, 0, Random.Range(minRotateSpeed,maxRotateSpeed)));
 	}
 }

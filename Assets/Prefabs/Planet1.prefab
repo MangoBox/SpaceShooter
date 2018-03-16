@@ -192,7 +192,10 @@ MonoBehaviour:
   planetUpperFoilage: {fileID: 212609131814508924}
   planetLowerFoilage: {fileID: 212769850123617682}
   planetShader: {fileID: 10708, guid: 0000000000000000f000000000000000, type: 0}
-  rotateSpeed: 0.3
+  minRotateSpeed: 0.1
+  maxRotateSpeed: 0.7
+  minScale: 0.3
+  maxScale: 1.2
 --- !u!212 &212107502284225888
 SpriteRenderer:
   m_ObjectHideFlags: 1
