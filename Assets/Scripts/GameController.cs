@@ -42,14 +42,25 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void GameOver() {
+		currentKm = 0;
+		overallKm = 0;
 		gameOverScreen.SetActive (true);
 		Time.timeScale = 0;
+		gameOverAnimation.SetTrigger("GameOverEntry");
 	}
 
-	public void StartNewGame(bool newGame) {
+	public void StartNewGame() {
+		Time.timeScale = 1;
 		SceneManager.LoadScene ("Scene1");
-
 	}
+
+	public void NextGalaxy() {
+		SceneManager.LoadScene ("Scene1");
+		galaxy++;
+		overallKm += (int)currentKm;
+		//currentShip.travellingSpeed *= 1.5f;
+	}
+
 
 	//TEMP CODE
 	//Remove everything here
@@ -65,6 +76,8 @@ public class GameController : MonoBehaviour {
 	static int overallKm = 0;
 	static int galaxy = 1;
 	float currentKm = 0;
+	public Animator gameOverAnimation;
+	public SpriteRenderer background;
 
 	void Update() {
 		currentKm = Camera.main.transform.position.x / 10;
@@ -74,16 +87,14 @@ public class GameController : MonoBehaviour {
 			GameOver ();
 		}
 		if (currentShip.isCompletedLevel ()) {
-			StartNewGame (false);
-			overallKm = (int)currentKm;
-			galaxy++;
+			NextGalaxy();
 		}
-		galaxyText.text = "Galaxy " + galaxy;
+		background.size += Vector2.right * 0.025f;
 	}
-
 
 	void Start() {
 		currentShip = FindObjectOfType<ShipPhysics> ();
 		StartGame ();
+		galaxyText.text = "Galaxy " + galaxy;
 	}
 }

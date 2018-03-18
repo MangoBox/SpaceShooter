@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Name: Main Camera Profile
   m_EditorClassIdentifier: 
   settings:
-  - {fileID: 114984675358641086}
-  - {fileID: 114757763200937432}
   - {fileID: 114799794688836730}
---- !u!114 &114757763200937432
+  - {fileID: 114354927041166164}
+  - {fileID: 114419319169835722}
+--- !u!114 &114354927041166164
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
@@ -23,250 +23,64 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adb84e30e02715445aeb9959894e3b4d, type: 3}
-  m_Name: ColorGrading
+  m_Script: {fileID: 11500000, guid: 6050e2d5de785ce4d931e4dbdbf2d755, type: 3}
+  m_Name: ChromaticAberration
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  spectralLut:
+    overrideState: 0
+    value: {fileID: 0}
+  intensity:
+    overrideState: 1
+    value: 0.176
+  fastMode:
+    overrideState: 1
+    value: 0
+--- !u!114 &114419319169835722
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48a79b01ea5641d4aa6daa2e23605641, type: 3}
+  m_Name: Bloom
   m_EditorClassIdentifier: 
   active: 0
   enabled:
     overrideState: 1
     value: 1
-  gradingMode:
+  intensity:
     overrideState: 1
-    value: 1
-  externalLut:
+    value: 15.28
+  threshold:
     overrideState: 1
-    value: {fileID: 0}
-  tonemapper:
+    value: 4.4
+  softKnee:
     overrideState: 1
-    value: 2
-  toneCurveToeStrength:
+    value: 0.85
+  diffusion:
     overrideState: 1
+    value: 8.2
+  anamorphicRatio:
+    overrideState: 0
     value: 0
-  toneCurveToeLength:
-    overrideState: 1
-    value: 0.5
-  toneCurveShoulderStrength:
-    overrideState: 1
-    value: 0
-  toneCurveShoulderLength:
-    overrideState: 1
-    value: 0.5
-  toneCurveShoulderAngle:
-    overrideState: 1
-    value: 0
-  toneCurveGamma:
-    overrideState: 1
-    value: 1
-  logLut:
-    overrideState: 1
-    value: {fileID: 0}
-  ldrLut:
-    overrideState: 1
-    value: {fileID: 0}
-  temperature:
-    overrideState: 1
-    value: 0
-  tint:
-    overrideState: 1
-    value: 0
-  colorFilter:
+  color:
     overrideState: 1
     value: {r: 1, g: 1, b: 1, a: 1}
-  hueShift:
-    overrideState: 1
+  fastMode:
+    overrideState: 0
     value: 0
-  saturation:
+  dirtTexture:
+    overrideState: 0
+    value: {fileID: 0}
+  dirtIntensity:
     overrideState: 1
-    value: 0
-  brightness:
-    overrideState: 1
-    value: 0
-  postExposure:
-    overrideState: 1
-    value: 0
-  contrast:
-    overrideState: 1
-    value: 0
-  mixerRedOutRedIn:
-    overrideState: 1
-    value: 100
-  mixerRedOutGreenIn:
-    overrideState: 1
-    value: 0
-  mixerRedOutBlueIn:
-    overrideState: 1
-    value: 0
-  mixerGreenOutRedIn:
-    overrideState: 1
-    value: 0
-  mixerGreenOutGreenIn:
-    overrideState: 1
-    value: 100
-  mixerGreenOutBlueIn:
-    overrideState: 1
-    value: 0
-  mixerBlueOutRedIn:
-    overrideState: 1
-    value: 0
-  mixerBlueOutGreenIn:
-    overrideState: 1
-    value: 0
-  mixerBlueOutBlueIn:
-    overrideState: 1
-    value: 100
-  lift:
-    overrideState: 1
-    value: {x: 0.96700954, y: 1, z: 0.9899873, w: 0.5735661}
-  gamma:
-    overrideState: 1
-    value: {x: 1, y: 1, z: 1, w: -0.34912726}
-  gain:
-    overrideState: 1
-    value: {x: 1, y: 1, z: 1, w: -0.4239401}
-  masterCurve:
-    overrideState: 1
-    value:
-      curve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 2
-          time: 0
-          value: 0
-          inSlope: 1
-          outSlope: 1
-          tangentMode: 0
-        - serializedVersion: 2
-          time: 1
-          value: 1
-          inSlope: 1
-          outSlope: 1
-          tangentMode: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_Loop: 0
-      m_ZeroValue: 0
-      m_Range: 1
-  redCurve:
-    overrideState: 1
-    value:
-      curve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 2
-          time: 0
-          value: 0
-          inSlope: 1
-          outSlope: 1
-          tangentMode: 0
-        - serializedVersion: 2
-          time: 1
-          value: 1
-          inSlope: 1
-          outSlope: 1
-          tangentMode: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_Loop: 0
-      m_ZeroValue: 0
-      m_Range: 1
-  greenCurve:
-    overrideState: 1
-    value:
-      curve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 2
-          time: 0
-          value: 0
-          inSlope: 1
-          outSlope: 1
-          tangentMode: 0
-        - serializedVersion: 2
-          time: 1
-          value: 1
-          inSlope: 1
-          outSlope: 1
-          tangentMode: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_Loop: 0
-      m_ZeroValue: 0
-      m_Range: 1
-  blueCurve:
-    overrideState: 1
-    value:
-      curve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 2
-          time: 0
-          value: 0
-          inSlope: 1
-          outSlope: 1
-          tangentMode: 0
-        - serializedVersion: 2
-          time: 1
-          value: 1
-          inSlope: 1
-          outSlope: 1
-          tangentMode: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_Loop: 0
-      m_ZeroValue: 0
-      m_Range: 1
-  hueVsHueCurve:
-    overrideState: 1
-    value:
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 0
-      m_Loop: 1
-      m_ZeroValue: 0.5
-      m_Range: 1
-  hueVsSatCurve:
-    overrideState: 1
-    value:
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_Loop: 1
-      m_ZeroValue: 0.5
-      m_Range: 1
-  satVsSatCurve:
-    overrideState: 1
-    value:
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_Loop: 0
-      m_ZeroValue: 0.5
-      m_Range: 1
-  lumVsSatCurve:
-    overrideState: 1
-    value:
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_Loop: 0
-      m_ZeroValue: 0.5
-      m_Range: 1
+    value: 1.1
 --- !u!114 &114799794688836730
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -293,7 +107,7 @@ MonoBehaviour:
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0.598
+    value: 0.39
   smoothness:
     overrideState: 1
     value: 0.322
@@ -302,31 +116,10 @@ MonoBehaviour:
     value: 0.754
   rounded:
     overrideState: 1
-    value: 0
+    value: 1
   mask:
     overrideState: 0
     value: {fileID: 0}
   opacity:
     overrideState: 0
     value: 1
---- !u!114 &114984675358641086
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b94fcd11afffcb142908bfcb1e261fba, type: 3}
-  m_Name: MotionBlur
-  m_EditorClassIdentifier: 
-  active: 0
-  enabled:
-    overrideState: 1
-    value: 1
-  shutterAngle:
-    overrideState: 1
-    value: 79
-  sampleCount:
-    overrideState: 1
-    value: 5
